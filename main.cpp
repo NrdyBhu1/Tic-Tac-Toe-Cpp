@@ -1,17 +1,15 @@
 #include <iostream>
 #include "COLORS.h"
 #include <stdlib.h>
+#include <regex>
+
+bool isNumber(std::string x){
+    std::regex e ("^-?\\d+");
+    if (std::regex_match (x,e)) return true;
+    else return false;
+}
 
 std::string tictactoeArr[18] = {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
-
-void processCmd(std::string comd){
-	int nm = std::atoi(comd.c_str());
-	if(nm < 10 && tictactoeArr[nm-1] != "X" && tictactoeArr[nm-1] != "O"){
-		tictactoeArr[nm-1] = "X";
-	}else{
-		std::cout << "Please enter a valid number";
-	}
-}
 
 void updateBoard(){
 	system("cls");
@@ -24,15 +22,33 @@ void updateBoard(){
 	std::cout << " " << std::endl;
 }
 
+void processCmd(std::string comd){
+	if (isNumber(comd)){
+		int nm = std::atoi(comd.c_str());
+		if(nm < 10 && tictactoeArr[nm-1] != "X" && tictactoeArr[nm-1] != "O"){
+			tictactoeArr[nm-1] = "\033[31mX\033[0m";
+			updateBoard();
+		}else{
+			updateBoard();
+			std::cout << RED << "Please enter a valid number" << RESET << std::endl;
+		}
+	}else{
+		if (comd != "end"){
+			updateBoard();
+			std::cout << RED << "Please enter a valid number" << RESET << std::endl;
+		}
+	}
+}
+
 int main(int argc, char** argv) {
 	// Do not move
 	system("title Tic Tac Toe");
 	system("cls");
+	updateBoard();
 
 	//Code
 	std::string cmd = "";
 	while (cmd != "end"){
-		updateBoard();
 		std::cout << ">:";
 		std::cin >> cmd;
 		processCmd(cmd);
