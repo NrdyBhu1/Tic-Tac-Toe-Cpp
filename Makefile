@@ -1,5 +1,5 @@
 CC = g++
-CFLAGS = c++17 -Wall -Wextra -Wpedantic
+CFLAGS = -std=c++17 -Wall -Wextra -Wpedantic
 FILE = src/main.cpp
 OBJ = bin/tic-tac-toe.exe
 
