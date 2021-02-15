@@ -21,4 +21,4 @@ BEGIN
     VALUE "Translation", 0x409, 1252
   END
 END
-MAINICON ICON "icon.ico"
+MAINICON ICON "res/icon.ico"
