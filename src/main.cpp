@@ -9,17 +9,16 @@ using namespace std;
 bool isNumber(std::string x)
 {
   std::regex e ("^-?\\d+");
-  if (std::regex_match (x,e)) return true;
-  else return false;
+  return std::regex_match (x,e);
 }
 
-auto board =
+char board[] =
   {
-    "/",
-    "-",    "-",    "-",
-    "-",    "-",    "-",
-    "-",    "-",    "-",
-    "/"
+    '/',
+    '-',    '-',    '-',
+    '-',    '-',    '-',
+    '-',    '-',    '-',
+    '/'
   };
 int playerMove = 0;
 
@@ -37,7 +36,7 @@ void UpdateBoard()
 
 bool validatePlayerMove(int move)
 {
-  return board[move] == "-" && move > 0 && move < 10;
+  return board[move] == '-' && move > 0 && move < 10;
 }
 
 int main() 
@@ -48,24 +47,33 @@ int main()
 
   bool gameOver = false;
   string input;
+  char currentPlayer = 'X';
   while(!gameOver)
     {
-      UpdateBoard(); 
+      UpdateBoard();
       cin >> input;
       if (input == "end")
 	{
 	  gameOver = true;
+	  cout << CYAN << "Ending Game..." << RESET << endl;
 	}else
 	{
-	  if(isNumber(input))
+	  if(!isNumber(input))
 	    {
 	      cout << RED << "Not a valid input `" << input << "`" << RESET << endl; 
 	    }else
 	    {
 	      playerMove = stoi(input);
-	      if (validatePlayerMove(playerMove))
+	      if (!validatePlayerMove(playerMove))
 		{
 		  cout << RED << "Not a valid playerMove `" << playerMove << "`" << RESET << endl;
+		}else{
+			board[playerMove] = currentPlayer;
+			if (currentPlayer == 'X') 
+				currentPlayer = 'O';
+
+			if (currentPlayer == 'O')
+				currentPlayer = 'X';
 		}
 	    }
 	}

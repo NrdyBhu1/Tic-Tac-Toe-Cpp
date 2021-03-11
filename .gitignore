@@ -1,5 +1,7 @@
 # Other
 *~
+*.swp
+*.un
 
 # Prerequisites
 *.d
