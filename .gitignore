@@ -2,6 +2,7 @@
 *~
 *.swp
 *.un
+*.swo
 
 # Prerequisites
 *.d
