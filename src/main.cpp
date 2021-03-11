@@ -69,11 +69,18 @@ int main()
 		  cout << RED << "Not a valid playerMove `" << playerMove << "`" << RESET << endl;
 		}else{
 			board[playerMove] = currentPlayer;
-			if (currentPlayer == 'X') 
-				currentPlayer = 'O';
+			switch(currentPlayer)
+			{
+				case 'X': {
+					currentPlayer = 'O';
+					break;
+				}
 
-			if (currentPlayer == 'O')
-				currentPlayer = 'X';
+				case 'O': {
+					currentPlayer = 'X';
+					break;
+				}
+			}
 		}
 	    }
 	}
